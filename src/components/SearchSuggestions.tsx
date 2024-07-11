@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import MenuItem from '@mui/material/MenuItem';
 import Link from "@mui/material/Link";
+import MenuItem from '@mui/material/MenuItem';
+import Paper from "@mui/material/Paper";
 
 import { Entity } from "@/components/EntityInfo";
 
@@ -14,13 +14,13 @@ const SearchSuggestions = (props: SearchSuggestionsProps) => {
     <Box sx={{ position: "relative" }}>
       <Paper elevation={8} sx={{ position: "absolute", top: "-14px", width: "100%" }} component="ul">
         {
-          props.suggestions.map((suggestion, i) => (
+          props.suggestions.map((entity, i) => (
             <MenuItem
-              key={suggestion.name}
+              key={entity.name}
               component="li"
               divider={i === props.suggestions.length - 1}
             >
-              {suggestion.name}
+              {entity.name} &mdash; {entity.address}, {entity.city} &mdash; {entity.country}
             </MenuItem>
           ))
         }

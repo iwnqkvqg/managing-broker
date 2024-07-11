@@ -8,13 +8,14 @@ import { ThemeProvider } from "@mui/material";
 import AddEntityDialog from "@/components/AddEntityDialog";
 import ManagingBroker from "@/components/ManagingBroker";
 import theme from "@/app/Theme";
+import { Country } from "@/data/country";
 import { Entity } from "@/components/EntityInfo";
 
 const dummie: Entity = {
   name: "Microsoft",
   address: "13 rue Jean de la Fontaine",
   city: "Paris",
-  country: "France",
+  country: Country.France,
 };
 
 export default function Home() {
@@ -34,7 +35,7 @@ export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main">
-        <ManagingBroker entity={entity} suggestions={suggestions} />        
+        <ManagingBroker entity={entity} suggestions={suggestions} onClear={() => setEntity(null)} />
         <AddEntityDialog
           isDialogVisible={isDialogVisible}
           onClose={() => setIsDialogVisible(false)}
