@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 
 import Container from "@mui/material/Container";
@@ -7,7 +5,7 @@ import { ThemeProvider } from "@mui/material";
 
 import AddEntityDialog from "@/components/AddEntityDialog";
 import ManagingBroker from "@/components/ManagingBroker";
-import theme from "@/app/Theme";
+import theme from "@/Theme";
 import { Country } from "@/data/country";
 import { Entity } from "@/components/EntityInfo";
 
@@ -18,10 +16,10 @@ const dummie: Entity = {
   country: Country.France,
 };
 
-export default function Home() {
-  const [ entity, setEntity ] = useState<Entity | null>(dummie);
-  const [ suggestions, setSuggestions ] = useState<Entity[]>([dummie]);
-  const [ isDialogVisible, setIsDialogVisible ] = useState(false);
+function App() {
+  const [entity, setEntity] = useState<Entity | null>(dummie);
+  const [suggestions, setSuggestions] = useState<Entity[]>([dummie]);
+  const [isDialogVisible, setIsDialogVisible] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,7 +33,11 @@ export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main">
-        <ManagingBroker entity={entity} suggestions={suggestions} onClear={() => setEntity(null)} />
+        <ManagingBroker
+          entity={entity}
+          suggestions={suggestions}
+          onClear={() => setEntity(null)}
+        />
         <AddEntityDialog
           isDialogVisible={isDialogVisible}
           onClose={() => setIsDialogVisible(false)}
@@ -45,3 +47,5 @@ export default function Home() {
     </ThemeProvider>
   );
 }
+
+export default App;

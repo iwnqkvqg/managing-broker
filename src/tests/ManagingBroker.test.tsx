@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 
 import ManagingBroker from "@/components/ManagingBroker";
 
-
 describe("ManagingBroker", () => {
   it("should render", () => {
     expect(true).toBe(true);

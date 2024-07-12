@@ -1,9 +1,9 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
 
 import EntityInfo from "@/components/EntityInfo";
-import SearchInput from './SearchInput';
+import SearchInputWithSuggestions from "@/components/SearchInputWithSuggestions";
 import { Entity } from "@/components/EntityInfo";
 
 interface ManagingBrokerProps {
@@ -22,13 +22,20 @@ const ManagingBroker = (props: ManagingBrokerProps) => {
         title="Managing Broker"
         titleTypographyProps={{ variant: "h5", component: "h5" }}
       ></CardHeader>
-        
-      <CardContent sx={{ display: "flex", flexDirection: "column", gap: "20px", position: "relative" }}>
-        {
-          props.entity
-          ? <EntityInfo entity={props.entity} onClear={props.onClear} />
-          : <SearchInput suggestions={props.suggestions} />
-        }
+
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+          position: "relative",
+        }}
+      >
+        {props.entity ? (
+          <EntityInfo entity={props.entity} onClear={props.onClear} />
+        ) : (
+          <SearchInputWithSuggestions suggestions={props.suggestions} />
+        )}
       </CardContent>
     </Card>
   );

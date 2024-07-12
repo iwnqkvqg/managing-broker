@@ -1,16 +1,15 @@
 import Button from "@mui/material/Button";
-import CardContent from '@mui/material/CardContent';
+import CardContent from "@mui/material/CardContent";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 
-
 interface AddEntityDialogProps {
-  isDialogVisible: boolean,
-  onClose: () => void,
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void,
+  isDialogVisible: boolean;
+  onClose: () => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const AddEntityDialog = (props: AddEntityDialogProps) => {
@@ -20,13 +19,20 @@ const AddEntityDialog = (props: AddEntityDialogProps) => {
       open={props.isDialogVisible}
       onClose={props.onClose}
       PaperProps={{
-        component: 'form',
+        component: "form",
         onSubmit: props.onSubmit,
       }}
     >
       <DialogTitle component="h6">Add manually</DialogTitle>
       <DialogContent sx={{ padding: "8px 24px 8px 24px !important" }}>
-        <CardContent sx={{ padding: "8px 0 8px 0", display: "flex", flexDirection: "column", gap: "20px" }}>
+        <CardContent
+          sx={{
+            padding: "8px 0 8px 0",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+          }}
+        >
           <TextField
             autoFocus
             InputLabelProps={{ shrink: true }}
@@ -66,9 +72,13 @@ const AddEntityDialog = (props: AddEntityDialogProps) => {
         </CardContent>
       </DialogContent>
 
-      <DialogActions sx={{ margin: "0 1rem 1rem 1rem"}}>
-        <Button onClick={props.onClose} color="secondary">Cancel</Button>
-        <Button type="submit" variant="contained">Save</Button>
+      <DialogActions sx={{ margin: "0 1rem 1rem 1rem" }}>
+        <Button onClick={props.onClose} color="secondary">
+          Cancel
+        </Button>
+        <Button type="submit" variant="contained">
+          Save
+        </Button>
       </DialogActions>
     </Dialog>
   );

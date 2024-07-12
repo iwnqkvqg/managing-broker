@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
 import InputAdornemntClear from "@/components/InputAdornmentClear";
-import { Country } from "@/data/country"; 
+import { Country } from "@/data/country";
 
 export interface Entity {
   address: string;
@@ -22,27 +22,42 @@ const EntityInfo = (props: EntityInfoProps) => {
     <>
       <TextField
         InputLabelProps={{ shrink: true }}
-        InputProps={{ endAdornment: <InputAdornemntClear onClick={props.onClear} /> }}
+        InputProps={{
+          endAdornment: <InputAdornemntClear onClick={props.onClear} />,
+        }}
         fullWidth
         label="Name"
       />
       <Box>
-        <Typography color="secondary" sx={{ fontFamily: "Montserrat", fontSize: "12px", lineHight: "14px" }}>
+        <Typography
+          color="secondary"
+          sx={{ fontFamily: "Montserrat", fontSize: "12px", lineHight: "14px" }}
+        >
           Address
         </Typography>
-        <Typography variant="body2" sx={{ fontFamily: "Montserrat", color: "black" }}>
-          { props.entity.address }
+        <Typography
+          variant="body2"
+          sx={{ fontFamily: "Montserrat", color: "black" }}
+        >
+          {props.entity.address}
         </Typography>
       </Box>
       <Box>
-        <Typography color="secondary" variant="body2" sx={{ fontFamily: "Montserrat", fontSize: "12px", lineHight: "14px" }}>
+        <Typography
+          color="secondary"
+          variant="body2"
+          sx={{ fontFamily: "Montserrat", fontSize: "12px", lineHight: "14px" }}
+        >
           Country
         </Typography>
-        <Typography variant="body2" sx={{ fontFamily: "Montserrat", color: "black" }}>
-          { props.entity.country }
+        <Typography
+          variant="body2"
+          sx={{ fontFamily: "Montserrat", color: "black" }}
+        >
+          {props.entity.country}
         </Typography>
       </Box>
-    </> 
+    </>
   );
 };
 

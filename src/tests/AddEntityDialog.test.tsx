@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 
-
 describe("AddEntityDialog", () => {
   it("should render", () => {
     expect(true).toBeTruthy();

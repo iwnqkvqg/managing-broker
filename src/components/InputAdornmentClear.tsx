@@ -1,12 +1,12 @@
-import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 
 interface InputAdornmentClearProps {
-  onClick: () => void,
+  onClick: () => void;
 }
 
-const InputAdornmentClear = ({onClick}: InputAdornmentClearProps) => {
+const InputAdornmentClear = ({ onClick }: InputAdornmentClearProps) => {
   return (
     <InputAdornment position="end">
       <IconButton
