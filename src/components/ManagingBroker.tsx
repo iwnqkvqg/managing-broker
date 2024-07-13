@@ -20,13 +20,7 @@ const ManagingBroker = () => {
         titleTypographyProps={{ component: "h5", variant: "h5" }}
       ></CardHeader>
 
-      <CardContent
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-        }}
-      >
+      <CardContent>
         {currentEntity ? <EntityInfo /> : <SearchInputWithSuggestions />}
       </CardContent>
     </Card>

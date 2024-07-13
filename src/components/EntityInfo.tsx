@@ -14,7 +14,14 @@ const EntityInfo = () => {
   const currentEntity = useSelector(selectCurrentEntity);
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px",
+      }}
+      data-testid="entity-info"
+    >
       <TextField
         InputLabelProps={{ shrink: true }}
         InputProps={{
@@ -26,7 +33,7 @@ const EntityInfo = () => {
         }}
         fullWidth
         label="Name"
-        value={currentEntity?.name}
+        value={currentEntity?.name || ""}
       />
       <Box>
         <Typography
@@ -57,7 +64,7 @@ const EntityInfo = () => {
           {currentEntity?.country}
         </Typography>
       </Box>
-    </>
+    </Box>
   );
 };
 

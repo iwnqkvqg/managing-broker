@@ -1,32 +1,31 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+import { fireEvent, screen } from "@testing-library/react";
 
-import { Country } from "@/data/country";
 import EntityInfo from "@/components/EntityInfo";
+import { Country } from "@/data/country";
+import { renderWithProviders } from "@/tests/utils";
 
 describe("EntityInfo", () => {
-  const onClearkMock = vi.fn();
-  const entity = {
-    address: "123 Main Street",
-    city: "New York",
-    country: Country.UnitedStates,
-    name: "John Doe",
-  };
+  it("should unset the current entity on clear button click", () => {
+    const { store } = renderWithProviders(<EntityInfo />, {
+      preloadedState: {
+        managingBroker: {
+          currentEntity: {
+            address: "Entity Address",
+            city: "Entity City",
+            country: Country.UnitedStates,
+            name: "Entity Name",
+          },
+          knownEntities: [],
+          isAddEntityDialogOpen: false,
+          searchSuggestions: [],
+        },
+      },
+    });
 
-  afterEach(() => {
-    cleanup();
+    fireEvent.click(screen.getByRole("button"));
+
+    const { managingBroker } = store.getState();
+    expect(managingBroker.currentEntity).toBeNull();
   });
-
-  it("should render", () => {
-    render(<EntityInfo entity={entity} onClear={onClearkMock} />);
-
-    const button = screen.getByRole("button");
-
-    expect(button).toBeDefined();
-  });
-
-  // should call the `onClear` callback-?
-  // should render the entity name
-  // should render the entity address
-  // should render the entity country
 });
