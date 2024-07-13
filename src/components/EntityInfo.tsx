@@ -3,30 +3,29 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
 import InputAdornemntClear from "@/components/InputAdornmentClear";
-import { Country } from "@/data/country";
+import { RootState, useDispatch, useSelector } from "@/store/store";
+import { unsetSelectedEntity } from "@/store/managingBrokerSlice";
 
-export interface Entity {
-  address: string;
-  city: string;
-  country: Country;
-  name: string;
-}
+const EntityInfo = () => {
+  const dispatch = useDispatch();
+  const selectedEntity = useSelector(
+    (state: RootState) => state.managingBroker.selectedEntity,
+  );
 
-interface EntityInfoProps {
-  entity: Entity;
-  onClear: () => void;
-}
-
-const EntityInfo = (props: EntityInfoProps) => {
   return (
     <>
       <TextField
         InputLabelProps={{ shrink: true }}
         InputProps={{
-          endAdornment: <InputAdornemntClear onClick={props.onClear} />,
+          endAdornment: (
+            <InputAdornemntClear
+              onClick={() => dispatch(unsetSelectedEntity())}
+            />
+          ),
         }}
         fullWidth
         label="Name"
+        value={selectedEntity?.name}
       />
       <Box>
         <Typography
@@ -39,7 +38,7 @@ const EntityInfo = (props: EntityInfoProps) => {
           variant="body2"
           sx={{ fontFamily: "Montserrat", color: "black" }}
         >
-          {props.entity.address}
+          {selectedEntity?.address}, {selectedEntity?.city}
         </Typography>
       </Box>
       <Box>
@@ -54,7 +53,7 @@ const EntityInfo = (props: EntityInfoProps) => {
           variant="body2"
           sx={{ fontFamily: "Montserrat", color: "black" }}
         >
-          {props.entity.country}
+          {selectedEntity?.country}
         </Typography>
       </Box>
     </>

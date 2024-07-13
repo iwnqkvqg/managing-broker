@@ -6,74 +6,96 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 
-interface AddEntityDialogProps {
-  isDialogVisible: boolean;
-  onClose: () => void;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-}
+import { Entity } from "@/data/entities";
+import { RootState, useDispatch, useSelector } from "@/store/store";
+import {
+  addEntity,
+  closeAddEntityDialog,
+  setSelectedEntity,
+} from "@/store/managingBrokerSlice";
 
-const AddEntityDialog = (props: AddEntityDialogProps) => {
+const AddEntityDialog = () => {
+  const isAddEntityDialogOpen = useSelector(
+    (state: RootState) => state.managingBroker.isAddEntityDialogOpen,
+  );
+  const dispatch = useDispatch();
+
+  const handleClose = () => {
+    dispatch(closeAddEntityDialog());
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const newEntity = Object.fromEntries(
+      formData.entries(),
+    ) as unknown as Entity;
+    dispatch(addEntity(newEntity));
+    dispatch(setSelectedEntity(newEntity));
+    dispatch(closeAddEntityDialog());
+  };
+
   return (
     <Dialog
       fullWidth
-      open={props.isDialogVisible}
-      onClose={props.onClose}
+      open={isAddEntityDialogOpen}
+      onClose={handleClose}
       PaperProps={{
         component: "form",
-        onSubmit: props.onSubmit,
+        onSubmit: handleSubmit,
       }}
     >
       <DialogTitle component="h6">Add manually</DialogTitle>
       <DialogContent sx={{ padding: "8px 24px 8px 24px !important" }}>
         <CardContent
           sx={{
-            padding: "8px 0 8px 0",
             display: "flex",
             flexDirection: "column",
             gap: "20px",
+            padding: "8px 0 8px 0",
           }}
         >
           <TextField
-            autoFocus
             InputLabelProps={{ shrink: true }}
-            required
-            name="name"
+            autoFocus
+            fullWidth
             label="Legal name"
-            fullWidth
+            name="name"
+            required
             variant="outlined"
           />
           <TextField
-            autoFocus
             InputLabelProps={{ shrink: true }}
-            required
-            name="address"
+            autoFocus
+            fullWidth
             label="Address"
-            fullWidth
+            name="address"
+            required
             variant="outlined"
           />
           <TextField
-            autoFocus
-            required
             InputLabelProps={{ shrink: true }}
-            name="city"
+            autoFocus
+            fullWidth
             label="City"
-            fullWidth
+            name="city"
+            required
             variant="outlined"
           />
           <TextField
-            autoFocus
             InputLabelProps={{ shrink: true }}
-            required
-            name="country"
-            label="Country"
+            autoFocus
             fullWidth
+            label="Country"
+            name="country"
+            required
             variant="outlined"
           />
         </CardContent>
       </DialogContent>
 
       <DialogActions sx={{ margin: "0 1rem 1rem 1rem" }}>
-        <Button onClick={props.onClose} color="secondary">
+        <Button onClick={handleClose} color="secondary">
           Cancel
         </Button>
         <Button type="submit" variant="contained">

@@ -1,24 +1,36 @@
-import { useRef } from "react";
-
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
-import Menu from "@mui/material/Menu";
 import Link from "@mui/material/Link";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { useEffect, useRef, useState } from "react";
 
 import InputAdornmentSearch from "@/components/InputAdornmentSearch";
-import { Entity } from "@/components/EntityInfo";
+import { RootState, useDispatch, useSelector } from "@/store/store";
 
-interface SearchInputProps {
-  suggestions: Entity[];
-  value?: string;
-}
+import {
+  openAddEntityDialog,
+  setSelectedEntity,
+} from "@/store/managingBrokerSlice";
 
-const SearchInputWithSuggestions = ({
-  suggestions,
-  value,
-}: SearchInputProps) => {
-  const ref = useRef<HTMLElement | null>(null);
+const SearchInputWithSuggestions = () => {
+  const menuAnchorRef = useRef<HTMLElement | null>(null);
+  const [menuWidth, setMenuWidth] = useState(0);
+  const dispatch = useDispatch();
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    if (menuAnchorRef.current) {
+      const { width } = menuAnchorRef.current.getBoundingClientRect();
+      setMenuWidth(width);
+    }
+  }, [menuAnchorRef]);
+
+  const searchSuggestions = useSelector(
+    (state: RootState) => state.managingBroker.searchSuggestions,
+  );
 
   return (
     <Box>
@@ -28,29 +40,40 @@ const SearchInputWithSuggestions = ({
         fullWidth
         label="Name"
         value={value}
+        onChange={(e) => setValue(e.target.value)}
       />
-      <Box ref={ref} sx={{ marginTop: "4px" }} />
-
-      <Menu anchorEl={ref?.current} autoFocus={false} open={true}>
-        {suggestions.map((entity, i) => (
-          <MenuItem key={entity.name} divider={i === suggestions.length - 1}>
-            {entity.name} - {entity.address}, {entity.city} - {entity.country}
-          </MenuItem>
-        ))}
-        <MenuItem>
-          or
-          <Link
-            component="button"
-            color="secondary"
-            sx={{
-              color: "rgba(0, 0, 0, 0.87)",
-              marginLeft: "0.25rem",
-            }}
-          >
-            Add manually
-          </Link>
-        </MenuItem>
-      </Menu>
+      <Box ref={menuAnchorRef} sx={{ marginTop: "4px" }}>
+        {value && (
+          <Paper elevation={8} sx={{ position: "absolute", width: menuWidth }}>
+            <MenuList autoFocus={false}>
+              {searchSuggestions.map((entity, i) => (
+                <MenuItem
+                  key={entity.name}
+                  divider={i === searchSuggestions.length - 1}
+                  onClick={() => dispatch(setSelectedEntity(entity))}
+                >
+                  {entity.name} - {entity.address}, {entity.city} -{" "}
+                  {entity.country}
+                </MenuItem>
+              ))}
+              <Typography variant="body2" sx={{ padding: "6px 16px" }}>
+                or
+                <Link
+                  component="button"
+                  color="secondary"
+                  sx={{
+                    color: "rgba(0, 0, 0, 0.87)",
+                    marginLeft: "0.25rem",
+                  }}
+                  onClick={() => dispatch(openAddEntityDialog())}
+                >
+                  Add manually
+                </Link>
+              </Typography>
+            </MenuList>
+          </Paper>
+        )}
+      </Box>
     </Box>
   );
 };

@@ -1,40 +1,52 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { Entity } from "@/components/EntityInfo";
+import { Entity, entities } from "@/data/entities";
 
 export interface managingBrokerState {
-  entity: Entity | null;
-  isModalOpen: boolean;
-  suggestions: Entity[];
+  isAddEntityDialogOpen: boolean;
+  knownEntities: Entity[];
+  searchSuggestions: Entity[];
+  selectedEntity: Entity | null;
 }
 
 const initialState: managingBrokerState = {
-  entity: null,
-  isModalOpen: false,
-  suggestions: [],
+  isAddEntityDialogOpen: false,
+  knownEntities: entities,
+  searchSuggestions: entities,
+  selectedEntity: null,
 };
 
 export const managingBrokerSlice = createSlice({
-  name: "managingBroker",
   initialState,
+  name: "managingBroker",
   reducers: {
-    setEntity: (state, action: PayloadAction<Entity>) => {
-      state.entity = action.payload;
+    addEntity: (state, action: PayloadAction<Entity>) => {
+      state.knownEntities = [...state.knownEntities, action.payload];
     },
-    unsetEntity: (state) => {
-      state.entity = null;
+    closeAddEntityDialog: (state) => {
+      state.isAddEntityDialogOpen = false;
     },
-    openModal: (state) => {
-      state.isModalOpen = true;
+    openAddEntityDialog: (state) => {
+      state.isAddEntityDialogOpen = true;
     },
-    closeModal: (state) => {
-      state.isModalOpen = false;
+    setSelectedEntity: (state, action: PayloadAction<Entity>) => {
+      state.selectedEntity = action.payload;
     },
+    unsetSelectedEntity: (state) => {
+      state.selectedEntity = null;
+    },
+    // setSearchSuggestions
+    // unsetSearchSuggestions
   },
 });
 
-export const { setEntity, unsetEntity, openModal, closeModal } =
-  managingBrokerSlice.actions;
+export const {
+  addEntity,
+  closeAddEntityDialog,
+  openAddEntityDialog,
+  setSelectedEntity,
+  unsetSelectedEntity,
+} = managingBrokerSlice.actions;
 
 export default managingBrokerSlice.reducer;

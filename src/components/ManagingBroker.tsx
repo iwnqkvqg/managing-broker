@@ -4,15 +4,13 @@ import CardHeader from "@mui/material/CardHeader";
 
 import EntityInfo from "@/components/EntityInfo";
 import SearchInputWithSuggestions from "@/components/SearchInputWithSuggestions";
-import { Entity } from "@/components/EntityInfo";
+import { RootState, useSelector } from "@/store/store";
 
-interface ManagingBrokerProps {
-  entity: Entity | null;
-  suggestions: Entity[];
-  onClear: () => void;
-}
+const ManagingBroker = () => {
+  const selectedEntity = useSelector(
+    (state: RootState) => state.managingBroker.selectedEntity,
+  );
 
-const ManagingBroker = (props: ManagingBrokerProps) => {
   return (
     <Card sx={{ width: "75%" }} component="article">
       <CardHeader
@@ -28,14 +26,9 @@ const ManagingBroker = (props: ManagingBrokerProps) => {
           display: "flex",
           flexDirection: "column",
           gap: "20px",
-          position: "relative",
         }}
       >
-        {props.entity ? (
-          <EntityInfo entity={props.entity} onClear={props.onClear} />
-        ) : (
-          <SearchInputWithSuggestions suggestions={props.suggestions} />
-        )}
+        {selectedEntity ? <EntityInfo /> : <SearchInputWithSuggestions />}
       </CardContent>
     </Card>
   );
