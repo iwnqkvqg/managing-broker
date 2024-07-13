@@ -7,17 +7,16 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 
 import { Entity } from "@/data/entities";
-import { RootState, useDispatch, useSelector } from "@/store/store";
+import { useDispatch, useSelector } from "@/store/store";
 import {
   addEntity,
   closeAddEntityDialog,
-  setSelectedEntity,
+  selectIsAddEntityDialogOpen,
+  setCurrentEntity,
 } from "@/store/managingBrokerSlice";
 
 const AddEntityDialog = () => {
-  const isAddEntityDialogOpen = useSelector(
-    (state: RootState) => state.managingBroker.isAddEntityDialogOpen,
-  );
+  const isAddEntityDialogOpen = useSelector(selectIsAddEntityDialogOpen);
   const dispatch = useDispatch();
 
   const handleClose = () => {
@@ -31,15 +30,15 @@ const AddEntityDialog = () => {
       formData.entries(),
     ) as unknown as Entity;
     dispatch(addEntity(newEntity));
-    dispatch(setSelectedEntity(newEntity));
+    dispatch(setCurrentEntity(newEntity));
     dispatch(closeAddEntityDialog());
   };
 
   return (
     <Dialog
       fullWidth
-      open={isAddEntityDialogOpen}
       onClose={handleClose}
+      open={isAddEntityDialogOpen}
       PaperProps={{
         component: "form",
         onSubmit: handleSubmit,
@@ -95,7 +94,7 @@ const AddEntityDialog = () => {
       </DialogContent>
 
       <DialogActions sx={{ margin: "0 1rem 1rem 1rem" }}>
-        <Button onClick={handleClose} color="secondary">
+        <Button color="secondary" onClick={handleClose}>
           Cancel
         </Button>
         <Button type="submit" variant="contained">

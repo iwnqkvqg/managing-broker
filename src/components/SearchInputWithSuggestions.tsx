@@ -8,11 +8,12 @@ import Typography from "@mui/material/Typography";
 import { useEffect, useRef, useState } from "react";
 
 import InputAdornmentSearch from "@/components/InputAdornmentSearch";
-import { RootState, useDispatch, useSelector } from "@/store/store";
+import { useDispatch, useSelector } from "@/store/store";
 
 import {
   openAddEntityDialog,
-  setSelectedEntity,
+  selectSearchSuggestions,
+  setCurrentEntity,
 } from "@/store/managingBrokerSlice";
 
 const SearchInputWithSuggestions = () => {
@@ -28,9 +29,7 @@ const SearchInputWithSuggestions = () => {
     }
   }, [menuAnchorRef]);
 
-  const searchSuggestions = useSelector(
-    (state: RootState) => state.managingBroker.searchSuggestions,
-  );
+  const searchSuggestions = useSelector(selectSearchSuggestions);
 
   return (
     <Box>
@@ -39,8 +38,8 @@ const SearchInputWithSuggestions = () => {
         InputProps={{ endAdornment: <InputAdornmentSearch /> }}
         fullWidth
         label="Name"
-        value={value}
         onChange={(e) => setValue(e.target.value)}
+        value={value}
       />
       <Box ref={menuAnchorRef} sx={{ marginTop: "4px" }}>
         {value && (
@@ -48,24 +47,24 @@ const SearchInputWithSuggestions = () => {
             <MenuList autoFocus={false}>
               {searchSuggestions.map((entity, i) => (
                 <MenuItem
-                  key={entity.name}
                   divider={i === searchSuggestions.length - 1}
-                  onClick={() => dispatch(setSelectedEntity(entity))}
+                  key={entity.name}
+                  onClick={() => dispatch(setCurrentEntity(entity))}
                 >
                   {entity.name} - {entity.address}, {entity.city} -{" "}
                   {entity.country}
                 </MenuItem>
               ))}
-              <Typography variant="body2" sx={{ padding: "6px 16px" }}>
+              <Typography sx={{ padding: "6px 16px" }} variant="body2">
                 or
                 <Link
-                  component="button"
                   color="secondary"
+                  component="button"
+                  onClick={() => dispatch(openAddEntityDialog())}
                   sx={{
                     color: "rgba(0, 0, 0, 0.87)",
                     marginLeft: "0.25rem",
                   }}
-                  onClick={() => dispatch(openAddEntityDialog())}
                 >
                   Add manually
                 </Link>

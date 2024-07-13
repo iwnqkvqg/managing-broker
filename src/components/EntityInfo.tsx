@@ -3,14 +3,15 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
 import InputAdornemntClear from "@/components/InputAdornmentClear";
-import { RootState, useDispatch, useSelector } from "@/store/store";
-import { unsetSelectedEntity } from "@/store/managingBrokerSlice";
+import { useDispatch, useSelector } from "@/store/store";
+import {
+  selectCurrentEntity,
+  unsetCurrentEntity,
+} from "@/store/managingBrokerSlice";
 
 const EntityInfo = () => {
   const dispatch = useDispatch();
-  const selectedEntity = useSelector(
-    (state: RootState) => state.managingBroker.selectedEntity,
-  );
+  const currentEntity = useSelector(selectCurrentEntity);
 
   return (
     <>
@@ -19,13 +20,13 @@ const EntityInfo = () => {
         InputProps={{
           endAdornment: (
             <InputAdornemntClear
-              onClick={() => dispatch(unsetSelectedEntity())}
+              onClick={() => dispatch(unsetCurrentEntity())}
             />
           ),
         }}
         fullWidth
         label="Name"
-        value={selectedEntity?.name}
+        value={currentEntity?.name}
       />
       <Box>
         <Typography
@@ -35,25 +36,25 @@ const EntityInfo = () => {
           Address
         </Typography>
         <Typography
+          sx={{ color: "black", fontFamily: "Montserrat" }}
           variant="body2"
-          sx={{ fontFamily: "Montserrat", color: "black" }}
         >
-          {selectedEntity?.address}, {selectedEntity?.city}
+          {currentEntity?.address}, {currentEntity?.city}
         </Typography>
       </Box>
       <Box>
         <Typography
           color="secondary"
-          variant="body2"
           sx={{ fontFamily: "Montserrat", fontSize: "12px", lineHight: "14px" }}
+          variant="body2"
         >
           Country
         </Typography>
         <Typography
+          sx={{ color: "black", fontFamily: "Montserrat" }}
           variant="body2"
-          sx={{ fontFamily: "Montserrat", color: "black" }}
         >
-          {selectedEntity?.country}
+          {currentEntity?.country}
         </Typography>
       </Box>
     </>

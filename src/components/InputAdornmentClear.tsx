@@ -11,9 +11,9 @@ const InputAdornmentClear = ({ onClick }: InputAdornmentClearProps) => {
     <InputAdornment position="end">
       <IconButton
         aria-label="Remove selected entity"
+        edge="end"
         onClick={onClick}
         onMouseDown={onClick}
-        edge="end"
       >
         <CloseIcon />
       </IconButton>
