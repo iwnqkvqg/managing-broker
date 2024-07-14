@@ -4,7 +4,7 @@ import { screen } from "@testing-library/react";
 import App from "@/App";
 import { renderWithProviders } from "@/tests/utils";
 
-describe("app", () => {
+describe("App", () => {
   it("should render", () => {
     renderWithProviders(<App />);
 

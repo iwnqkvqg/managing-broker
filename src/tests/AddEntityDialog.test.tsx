@@ -10,7 +10,7 @@ describe.only("AddEntityDialog", () => {
     cleanup();
   });
 
-  it("should set current entity on form submit", async () => {
+  it("should update current entity on successfull form submit", async () => {
     const newEntity = {
       name: "test name",
       address: "test address",
@@ -49,9 +49,7 @@ describe.only("AddEntityDialog", () => {
     });
   });
 
-  it.todo(
-    "should set current entity on Enter key press if focus is on the input",
-  );
+  it.todo("should submit the form on Enter key press if focus is on the input");
 
   it("should close the dialog on cancel", () => {
     const { store } = renderWithProviders(<AddEntityDialog />, {

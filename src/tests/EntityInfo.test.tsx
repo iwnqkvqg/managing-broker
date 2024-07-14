@@ -6,7 +6,7 @@ import { Country } from "@/data/country";
 import { renderWithProviders } from "@/tests/utils";
 
 describe("EntityInfo", () => {
-  it("should unset the current entity on clear button click", () => {
+  it("should unset the current entity on `Clear` button click", () => {
     const { store } = renderWithProviders(<EntityInfo />, {
       preloadedState: {
         managingBroker: {

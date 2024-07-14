@@ -10,7 +10,7 @@ describe("ManagingBroker", () => {
     cleanup();
   });
 
-  it("should display the entity info if the entity is not null", () => {
+  it("should display the entity info if current entity is set", () => {
     renderWithProviders(<ManagingBroker />, {
       preloadedState: {
         managingBroker: {
@@ -30,7 +30,7 @@ describe("ManagingBroker", () => {
     expect(entityInfo).toBeDefined();
   });
 
-  it("should display the search input with suggestions if the entity is null", () => {
+  it("should display the search input with suggestions if current entity is not set", () => {
     renderWithProviders(<ManagingBroker />);
 
     const searchInputWithSuggestions = screen.getByTestId(
