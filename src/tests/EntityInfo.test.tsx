@@ -16,7 +16,6 @@ describe("EntityInfo", () => {
             country: Country.UnitedStates,
             name: "Entity Name",
           },
-          knownEntities: [],
           isAddEntityDialogOpen: false,
           searchSuggestions: [],
         },

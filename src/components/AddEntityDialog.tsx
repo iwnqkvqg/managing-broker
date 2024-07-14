@@ -7,12 +7,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 
 import { Entity } from "@/components/EntityInfo";
+import { addEntity } from "@/services/managingBrokerApi";
 import { useDispatch, useSelector } from "@/store";
 import {
-  addEntity,
+  setCurrentEntity,
   closeAddEntityDialog,
   selectIsAddEntityDialogOpen,
-  setCurrentEntity,
 } from "@/store/managingBrokerSlice";
 
 const AddEntityDialog = () => {
@@ -29,9 +29,12 @@ const AddEntityDialog = () => {
     const newEntity = Object.fromEntries(
       formData.entries(),
     ) as unknown as Entity;
-    dispatch(addEntity(newEntity));
-    dispatch(setCurrentEntity(newEntity));
-    dispatch(closeAddEntityDialog());
+    addEntity(newEntity)
+      .then(() => {
+        dispatch(setCurrentEntity(newEntity));
+        dispatch(closeAddEntityDialog());
+      })
+      .catch(console.error);
   };
 
   return (

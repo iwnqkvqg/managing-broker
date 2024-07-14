@@ -16,7 +16,6 @@ describe("SearchSuggestions", () => {
         managingBroker: {
           currentEntity: null,
           isAddEntityDialogOpen: false,
-          knownEntities: [],
           searchSuggestions: [
             {
               address: "Entity 1 Address",
@@ -53,7 +52,6 @@ describe("SearchSuggestions", () => {
           managingBroker: {
             currentEntity: null,
             isAddEntityDialogOpen: false,
-            knownEntities: [],
             searchSuggestions: [
               selectedEntity,
               {

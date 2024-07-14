@@ -1,7 +1,8 @@
 import { entities } from "@/data/entities";
 import { Entity } from "@/components/EntityInfo";
 
-const mockDelay = 3000;
+const knownEntities = [...entities];
+const mockDelay = 100;
 
 const getSearchSuggestions = async (
   query: string,
@@ -19,7 +20,7 @@ const getSearchSuggestions = async (
 
     setTimeout(() => {
       resolve(
-        entities.filter((entity) =>
+        knownEntities.filter((entity) =>
           entity.name.toLowerCase().startsWith(query.toLowerCase()),
         ),
       );
@@ -27,4 +28,13 @@ const getSearchSuggestions = async (
   });
 };
 
-export { getSearchSuggestions };
+const addEntity = async (entity: Entity): Promise<void> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      knownEntities.push(entity);
+      resolve();
+    }, mockDelay);
+  });
+};
+
+export { addEntity, getSearchSuggestions };

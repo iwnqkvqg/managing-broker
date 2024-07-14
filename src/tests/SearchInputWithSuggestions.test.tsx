@@ -20,7 +20,6 @@ describe("SearchInputWithSuggestions", () => {
           ],
           isAddEntityDialogOpen: false,
           currentEntity: null,
-          knownEntities: [],
         },
       },
     });

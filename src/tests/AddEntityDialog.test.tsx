@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { cleanup, fireEvent, screen } from "@testing-library/react";
+import { cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
 
 import AddEntityDialog from "@/components/AddEntityDialog";
 import { Country } from "@/data/country";
@@ -10,7 +10,7 @@ describe.only("AddEntityDialog", () => {
     cleanup();
   });
 
-  it("should set current entity on form submit", () => {
+  it("should set current entity on form submit", async () => {
     const newEntity = {
       name: "test name",
       address: "test address",
@@ -22,7 +22,6 @@ describe.only("AddEntityDialog", () => {
         managingBroker: {
           currentEntity: null,
           isAddEntityDialogOpen: true,
-          knownEntities: [],
           searchSuggestions: [],
         },
       },
@@ -43,10 +42,13 @@ describe.only("AddEntityDialog", () => {
     });
     fireEvent.click(screen.getByText("Save"));
 
-    const { managingBroker } = store.getState();
-    expect(managingBroker.currentEntity).toEqual(newEntity);
-    expect(managingBroker.isAddEntityDialogOpen).toBe(false);
+    await waitFor(() => {
+      const { managingBroker } = store.getState();
+      expect(managingBroker.currentEntity).toEqual(newEntity);
+      expect(managingBroker.isAddEntityDialogOpen).toBe(false);
+    });
   });
+
   it.todo(
     "should set current entity on Enter key press if focus is on the input",
   );
@@ -57,7 +59,6 @@ describe.only("AddEntityDialog", () => {
         managingBroker: {
           currentEntity: null,
           isAddEntityDialogOpen: true,
-          knownEntities: [],
           searchSuggestions: [],
         },
       },
@@ -68,6 +69,8 @@ describe.only("AddEntityDialog", () => {
     const { managingBroker } = store.getState();
     expect(managingBroker.isAddEntityDialogOpen).toBe(false);
   });
+
   it.todo("should close the dialog on Escape key press");
+
   it.todo("should close the dialog on click outside");
 });

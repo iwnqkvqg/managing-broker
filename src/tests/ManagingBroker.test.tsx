@@ -21,7 +21,6 @@ describe("ManagingBroker", () => {
             name: "Entity Name",
           },
           isAddEntityDialogOpen: false,
-          knownEntities: [],
           searchSuggestions: [],
         },
       },
