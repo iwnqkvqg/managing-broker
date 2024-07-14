@@ -9,7 +9,7 @@ import {
   selectSearchSuggestions,
   setCurrentEntity,
 } from "@/store/managingBrokerSlice";
-import { useDispatch, useSelector } from "@/store/store";
+import { useDispatch, useSelector } from "@/store";
 
 interface SearchSuggestionsProps {
   menuWidth: number;

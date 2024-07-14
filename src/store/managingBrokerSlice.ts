@@ -1,19 +1,19 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-import type { RootState } from "@/store/store";
+import type { RootState } from "@/store";
 import { Entity, entities } from "@/data/entities";
 
 export interface managingBrokerState {
   isAddEntityDialogOpen: boolean;
-  knownEntities: Entity[];
+  knownEntities: Entity[]; // TODO remove
   searchSuggestions: Entity[];
   currentEntity: Entity | null;
 }
 
 const initialState: managingBrokerState = {
   isAddEntityDialogOpen: false,
-  knownEntities: entities,
+  knownEntities: entities, // TODO remove
   searchSuggestions: entities,
   currentEntity: null,
 };
@@ -23,6 +23,7 @@ export const managingBrokerSlice = createSlice({
   name: "managingBroker",
   reducers: {
     addEntity: (state, action: PayloadAction<Entity>) => {
+      // TODO remove
       state.knownEntities = [...state.knownEntities, action.payload];
     },
     closeAddEntityDialog: (state) => {
@@ -43,7 +44,7 @@ export const managingBrokerSlice = createSlice({
 });
 
 export const {
-  addEntity,
+  addEntity, // TODO remove
   closeAddEntityDialog,
   openAddEntityDialog,
   setCurrentEntity,
@@ -54,8 +55,9 @@ export const selectSearchSuggestions = (state: RootState) =>
   state.managingBroker.searchSuggestions;
 export const selectCurrentEntity = (state: RootState) =>
   state.managingBroker.currentEntity;
-export const selectKnownEntities = (state: RootState) =>
-  state.managingBroker.knownEntities;
+export const selectKnownEntities = (
+  state: RootState, // TODO remove
+) => state.managingBroker.knownEntities;
 export const selectIsAddEntityDialogOpen = (state: RootState) =>
   state.managingBroker.isAddEntityDialogOpen;
 

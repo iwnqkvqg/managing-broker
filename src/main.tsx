@@ -6,10 +6,10 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "@mui/material";
 
-import "./index.css";
-import App from "./App";
+import "@/index.css";
+import App from "@/App";
 import theme from "@/Theme";
-import { store } from "./store/store";
+import { store } from "@/store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

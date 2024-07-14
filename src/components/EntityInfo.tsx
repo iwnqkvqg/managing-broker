@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
 import InputAdornemntClear from "@/components/InputAdornmentClear";
-import { useDispatch, useSelector } from "@/store/store";
+import { useDispatch, useSelector } from "@/store";
 import {
   selectCurrentEntity,
   unsetCurrentEntity,
@@ -30,6 +30,7 @@ const EntityInfo = () => {
               onClick={() => dispatch(unsetCurrentEntity())}
             />
           ),
+          readOnly: true,
         }}
         fullWidth
         label="Name"

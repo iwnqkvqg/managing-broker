@@ -3,7 +3,6 @@ import TextField from "@mui/material/TextField";
 import { useEffect, useRef, useState } from "react";
 
 import InputAdornmentSearch from "@/components/InputAdornmentSearch";
-
 import SearchSuggestions from "@/components/SearchSuggestions";
 
 const SearchInputWithSuggestions = () => {

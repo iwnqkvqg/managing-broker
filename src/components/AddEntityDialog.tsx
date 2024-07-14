@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 
 import { Entity } from "@/data/entities";
-import { useDispatch, useSelector } from "@/store/store";
+import { useDispatch, useSelector } from "@/store";
 import {
   addEntity,
   closeAddEntityDialog,
@@ -60,7 +60,6 @@ const AddEntityDialog = () => {
             fullWidth
             label="Legal name"
             name="name"
-            required
             variant="outlined"
           />
           <TextField
@@ -69,7 +68,6 @@ const AddEntityDialog = () => {
             fullWidth
             label="Address"
             name="address"
-            required
             variant="outlined"
           />
           <TextField
@@ -78,7 +76,6 @@ const AddEntityDialog = () => {
             fullWidth
             label="City"
             name="city"
-            required
             variant="outlined"
           />
           <TextField
@@ -87,7 +84,6 @@ const AddEntityDialog = () => {
             fullWidth
             label="Country"
             name="country"
-            required
             variant="outlined"
           />
         </CardContent>

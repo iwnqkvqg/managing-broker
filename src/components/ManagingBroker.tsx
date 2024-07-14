@@ -5,7 +5,7 @@ import CardHeader from "@mui/material/CardHeader";
 import EntityInfo from "@/components/EntityInfo";
 import SearchInputWithSuggestions from "@/components/SearchInputWithSuggestions";
 import { selectCurrentEntity } from "@/store/managingBrokerSlice";
-import { useSelector } from "@/store/store";
+import { useSelector } from "@/store";
 
 const ManagingBroker = () => {
   const currentEntity = useSelector(selectCurrentEntity);
@@ -19,7 +19,6 @@ const ManagingBroker = () => {
         title="Managing Broker"
         titleTypographyProps={{ component: "h5", variant: "h5" }}
       ></CardHeader>
-
       <CardContent>
         {currentEntity ? <EntityInfo /> : <SearchInputWithSuggestions />}
       </CardContent>
