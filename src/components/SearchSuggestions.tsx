@@ -31,7 +31,12 @@ const SearchSuggestions = ({ menuWidth }: SearchSuggestionsProps) => {
             {entity.name} - {entity.address}, {entity.city} - {entity.country}
           </MenuItem>
         ))}
-        <Typography sx={{ padding: "6px 16px" }} variant="body2">
+        <Typography
+          sx={{ padding: "6px 16px" }}
+          variant="body2"
+          component="li"
+          role="menuitem"
+        >
           or
           <Link
             color="secondary"
