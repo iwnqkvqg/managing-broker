@@ -1,3 +1,4 @@
+import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
 import Dialog from "@mui/material/Dialog";
@@ -5,6 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 import { Entity } from "@/components/EntityInfo";
 import { addEntity } from "@/services/managingBrokerApi";
@@ -14,6 +16,7 @@ import {
   closeAddEntityDialog,
   selectIsAddEntityDialogOpen,
 } from "@/store/managingBrokerSlice";
+import { Country } from "@/data/country";
 
 const AddEntityDialog = () => {
   const isAddEntityDialogOpen = useSelector(selectIsAddEntityDialogOpen);
@@ -47,7 +50,14 @@ const AddEntityDialog = () => {
         onSubmit: handleSubmit,
       }}
     >
-      <DialogTitle component="h6">Add manually</DialogTitle>
+      <DialogTitle component="h6">New Legal Entity</DialogTitle>
+      <Typography
+        color="secondary"
+        sx={{ paddingX: "24px", position: "relative", top: "-1rem" }}
+        variant="body2"
+      >
+        All fields are required
+      </Typography>
       <DialogContent sx={{ padding: "8px 24px 8px 24px !important" }}>
         <CardContent
           sx={{
@@ -58,36 +68,50 @@ const AddEntityDialog = () => {
           }}
         >
           <TextField
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: true, required: false }}
+            autoComplete="off"
             autoFocus
             fullWidth
-            label="Legal name"
+            label="Name"
             name="name"
+            placeholder="Microsoft"
+            required
             variant="outlined"
           />
           <TextField
-            InputLabelProps={{ shrink: true }}
-            autoFocus
+            InputLabelProps={{ shrink: true, required: false }}
+            autoComplete="off"
             fullWidth
             label="Address"
             name="address"
+            placeholder="47 Quai d'Issy-les-Moulineaux"
+            required
             variant="outlined"
           />
           <TextField
-            InputLabelProps={{ shrink: true }}
-            autoFocus
+            InputLabelProps={{ shrink: true, required: false }}
             fullWidth
             label="City"
             name="city"
+            placeholder="Paris"
+            required
             variant="outlined"
           />
-          <TextField
-            InputLabelProps={{ shrink: true }}
-            autoFocus
+          <Autocomplete
             fullWidth
-            label="Country"
-            name="country"
-            variant="outlined"
+            options={Object.values(Country)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                InputLabelProps={{ shrink: true, required: false }}
+                fullWidth
+                label="Country"
+                name="country"
+                placeholder="France"
+                required
+                variant="outlined"
+              />
+            )}
           />
         </CardContent>
       </DialogContent>
@@ -97,7 +121,7 @@ const AddEntityDialog = () => {
           Cancel
         </Button>
         <Button type="submit" variant="contained">
-          Save
+          Add
         </Button>
       </DialogActions>
     </Dialog>

@@ -1,8 +1,7 @@
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import InputAdornemntClear from "@/components/InputAdornmentClear";
 import { Country } from "@/data/country";
 import {
   selectCurrentEntity,
@@ -23,27 +22,27 @@ const EntityInfo = () => {
 
   return (
     <Box
+      data-testid="entity-info"
       sx={{
         display: "flex",
         flexDirection: "column",
         gap: "20px",
       }}
-      data-testid="entity-info"
     >
-      <TextField
-        InputLabelProps={{ shrink: true }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornemntClear
-              onClick={() => dispatch(unsetCurrentEntity())}
-            />
-          ),
-          readOnly: true,
-        }}
-        fullWidth
-        label="Name"
-        value={currentEntity?.name || ""}
-      />
+      <Box>
+        <Typography
+          color="secondary"
+          sx={{ fontFamily: "Montserrat", fontSize: "12px", lineHight: "14px" }}
+        >
+          Name
+        </Typography>
+        <Typography
+          sx={{ color: "black", fontFamily: "Montserrat" }}
+          variant="body2"
+        >
+          {currentEntity?.name}
+        </Typography>
+      </Box>
       <Box>
         <Typography
           color="secondary"
@@ -72,6 +71,15 @@ const EntityInfo = () => {
         >
           {currentEntity?.country}
         </Typography>
+      </Box>
+      <Box>
+        <Button
+          color="secondary"
+          onClick={() => dispatch(unsetCurrentEntity())}
+          variant="outlined"
+        >
+          Delete
+        </Button>
       </Box>
     </Box>
   );

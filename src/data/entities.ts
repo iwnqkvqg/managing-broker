@@ -4,7 +4,7 @@ import { Entity } from "@/components/EntityInfo";
 const entities: Entity[] = [
   {
     name: "Microsoft",
-    address: "1 rue de la Légion d'Honneur",
+    address: "47 Quai d'Issy-les-Moulineaux",
     city: "Paris",
     country: Country.France,
   },

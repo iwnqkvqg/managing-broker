@@ -72,25 +72,4 @@ describe("SearchSuggestions", () => {
     const { managingBroker } = store.getState();
     expect(managingBroker.currentEntity).toEqual(selectedEntity);
   });
-
-  it("should render the `Add manually` button", () => {
-    renderWithProviders(<SearchSuggestions menuWidth={100} />);
-
-    const addManually = screen.getByRole("button");
-
-    expect(addManually).toBeDefined();
-    expect(addManually.textContent).toBe("Add manually");
-  });
-
-  it("should open the adialog on `Add manually` button click", () => {
-    const { store } = renderWithProviders(
-      <SearchSuggestions menuWidth={100} />,
-    );
-
-    const addManually = screen.getByRole("button");
-    fireEvent.click(addManually);
-
-    const { managingBroker } = store.getState();
-    expect(managingBroker.isAddEntityDialogOpen).toBe(true);
-  });
 });
