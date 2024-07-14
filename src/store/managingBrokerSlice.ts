@@ -15,7 +15,7 @@ export interface managingBrokerState {
 const initialState: managingBrokerState = {
   isAddEntityDialogOpen: false,
   knownEntities: entities, // TODO remove
-  searchSuggestions: entities,
+  searchSuggestions: [],
   currentEntity: null,
 };
 
@@ -39,8 +39,12 @@ export const managingBrokerSlice = createSlice({
     unsetCurrentEntity: (state) => {
       state.currentEntity = null;
     },
-    // setSearchSuggestions
-    // unsetSearchSuggestions
+    setSearchSuggestions: (state, action: PayloadAction<Entity[]>) => {
+      state.searchSuggestions = action.payload;
+    },
+    unsetSearchSuggestions: (state) => {
+      state.searchSuggestions = [];
+    },
   },
 });
 
@@ -50,6 +54,8 @@ export const {
   openAddEntityDialog,
   setCurrentEntity,
   unsetCurrentEntity,
+  setSearchSuggestions,
+  unsetSearchSuggestions,
 } = managingBrokerSlice.actions;
 
 export const selectSearchSuggestions = (state: RootState) =>
