@@ -11,7 +11,7 @@ const ManagingBroker = () => {
   const currentEntity = useSelector(selectCurrentEntity);
 
   return (
-    <Card sx={{ width: "75%" }} component="article">
+    <Card sx={{ width: "100%" }} component="article">
       <CardHeader
         component="header"
         subheader="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
