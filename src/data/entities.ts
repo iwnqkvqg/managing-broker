@@ -1,11 +1,5 @@
 import { Country } from "@/data/country";
-
-export interface Entity {
-  name: string;
-  address: string;
-  city: string;
-  country: Country;
-}
+import { Entity } from "@/components/EntityInfo";
 
 const entities: Entity[] = [
   {

@@ -3,11 +3,19 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 
 import InputAdornemntClear from "@/components/InputAdornmentClear";
-import { useDispatch, useSelector } from "@/store";
+import { Country } from "@/data/country";
 import {
   selectCurrentEntity,
   unsetCurrentEntity,
 } from "@/store/managingBrokerSlice";
+import { useDispatch, useSelector } from "@/store";
+
+export interface Entity {
+  name: string;
+  address: string;
+  city: string;
+  country: Country;
+}
 
 const EntityInfo = () => {
   const dispatch = useDispatch();

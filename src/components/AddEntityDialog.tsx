@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 
-import { Entity } from "@/data/entities";
+import { Entity } from "@/components/EntityInfo";
 import { useDispatch, useSelector } from "@/store";
 import {
   addEntity,

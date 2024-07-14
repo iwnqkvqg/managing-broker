@@ -2,7 +2,8 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { RootState } from "@/store";
-import { Entity, entities } from "@/data/entities";
+import { Entity } from "@/components/EntityInfo";
+import { entities } from "@/data/entities";
 
 export interface managingBrokerState {
   isAddEntityDialogOpen: boolean;
